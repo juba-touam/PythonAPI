@@ -7,7 +7,7 @@ node {
     }
 
 	stage('Install dependencies') {
-		sh "sudo docker run --rm -v $PWD:/app -w /app python:3.9 pip install -r requirements.txt"
+		sh "sudo docker run --rm -v $PWD:/app -w /app python:3.9 pip install -r /app/requirements.txt"
 	}
 
 
