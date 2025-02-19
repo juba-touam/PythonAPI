@@ -1,4 +1,4 @@
-pipeline {
+node("ci-node") {
 	agent any
 
     environment {
