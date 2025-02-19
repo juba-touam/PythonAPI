@@ -1,4 +1,4 @@
-node("ci-node") {
+node {
 	agent any
 
 	environment {
