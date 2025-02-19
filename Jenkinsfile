@@ -1,6 +1,4 @@
 node("ci-node") {
-	agent any
-
     environment {
 		GIT_COMMIT_HASH = ''
     }
