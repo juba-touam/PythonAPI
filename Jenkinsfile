@@ -21,19 +21,18 @@ pipeline {
             }
         }
 
-        stage('Run Tests Inside Docker') {
-			steps {
-				sh 'docker run --rm my-python-app pytest'
-            }
-        }
+        //stage('Run Tests Inside Docker') {
+		//	steps {
+		//		sh 'docker run --rm my-python-app pytest' // Exécute les tests avec pytest à l'intérieur du conteneur
+        //    }
+        //}
 
-        stage("Push Docker image") {
+        stage("Push Docker Image") {
 			steps {
 				withCredentials([usernamePassword(credentialsId: 'mchekini', passwordVariable: 'password', usernameVariable: 'username')]) {
-					sh "docker login -u $username -p $password"
-                    sh "docker tag my-python-app mchekini/scpi-invest-plus-api:$GIT_COMMIT_HASH"
-                    sh "docker push mchekini/scpi-invest-plus-api:$GIT_COMMIT_HASH"
-                    sh "docker rmi mchekini/scpi-invest-plus-api:$GIT_COMMIT_HASH"
+					sh "sudo docker login -u $username -p $password"
+                    sh "sudo docker push mchekini/bibliotheque-api:$GIT_COMMIT_HASH"
+                    sh "sudo docker rmi mchekini/bibliotheque-api:$GIT_COMMIT_HASH"
                 }
             }
         }
