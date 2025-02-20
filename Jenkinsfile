@@ -15,7 +15,7 @@ node {
 			sh "sudo docker build -t mchekini/my-python-app:$GIT_COMMIT_HASH ."
         }
    	stage('Run Tests') {
-			sh "sudo docker run --rm my-python-app:$GIT_COMMIT_HASH pytest"
+			sh "sudo docker run --rm mchekini/my-python-app:$GIT_COMMIT_HASH pytest"
         }
 
     stage("Push Docker image"){
