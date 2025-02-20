@@ -7,9 +7,8 @@ node {
     }
 
 	stage('Install dependencies') {
-		sh "sudo docker run --rm -v ${PWD}:/app -w /app python:3.9 pip install -r requirements.txt"
+		sh "sudo docker run --rm -v ${PWD}/PythonAPI:/app -w /app python:3.9 pip install -r /app/requirements.txt"
 	}
-
 
     stage('Build Docker Image') {
 			sh "sudo docker build -t mchekini/my-python-app:$GIT_COMMIT_HASH ."
@@ -25,6 +24,4 @@ node {
             sh "sudo docker rmi mchekini/my-python-app:$GIT_COMMIT_HASH"
         }
     }
-
 }
-
