@@ -11,12 +11,14 @@ node {
 		sh "sudo docker run --rm -v ${env.WORKSPACE}:/app -w /app python:3.9 pip install -r /app/requirements.txt"
 	}
 
+	stage('Run Tests') {
+		sh "sudo docker run --rm -v ${env.WORKSPACE}:/app -w /app -e PYTHONPATH=/app mchekini/my-python-app:$GIT_COMMIT_HASH pytest"
+        }
+
     stage('Build Docker Image') {
 			sh "sudo docker build -t mchekini/my-python-app:$GIT_COMMIT_HASH ."
         }
-   	stage('Run Tests') {
-			sh "sudo docker run --rm mchekini/my-python-app:$GIT_COMMIT_HASH pytest"
-        }
+
 
     stage("Push Docker image"){
 		withCredentials([usernamePassword(credentialsId: 'mchekini', passwordVariable: 'password', usernameVariable: 'username')]) {
