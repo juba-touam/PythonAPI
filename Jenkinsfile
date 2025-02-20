@@ -7,7 +7,8 @@ node {
     }
 
 	stage('Install dependencies') {
-		sh "sudo docker run --rm -v ${PWD}/PythonAPI:/app -w /app python:3.9 pip install -r /app/requirements.txt"
+		sh "ls -l ${env.WORKSPACE}"
+		sh "sudo docker run --rm -v ${env.WORKSPACE}:/app -w /app python:3.9 pip install -r /app/requirements.txt"
 	}
 
     stage('Build Docker Image') {
