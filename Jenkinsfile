@@ -14,9 +14,9 @@ node {
     stage('Build Docker Image') {
 			sh "sudo docker build -t mchekini/my-python-app:$GIT_COMMIT_HASH ."
         }
-    //stage('Run Tests') {
-	//		sh "sudo docker run --rm ${imageName} pytest"
-    //    }
+    stage('Run Tests') {
+			sh "sudo docker run --rm my-python-app pytest"
+        }
 
     stage("Push Docker image"){
 		withCredentials([usernamePassword(credentialsId: 'mchekini', passwordVariable: 'password', usernameVariable: 'username')]) {
